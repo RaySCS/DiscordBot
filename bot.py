@@ -1,4 +1,8 @@
 import discord
+import logging
+import aiohttp
+
+logging.basicConfig(level=logging.INFO)
 
 client = discord.Client()
 
@@ -8,11 +12,24 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    print("message received", message)
     if message.author == client.user:
         return
 
     if message.content.startswith('$hello'):
         await message.channel.send('Hello {0.author}!'.format(message))
 
-client.run('NzMwOTIyNjMwMTIyNzAwODcw.XwejLA.7OwZgpiUzMhD8np0TIjQqkripJc')
+    if "wave to me" in message.content:
+        await message.add_reaction('👋')
+
+    messageKey = "kakashi"
+    if messageKey in message.content:
+        async with aiohttp.ClientSession() as session:
+            async with session.get('http://aws.random.cat/',messageKey) as r:
+                if r.status == 200:
+                    json = await r.json()
+                    await message.channel.send(json['file'])
+
+token_file = open("token", "r")
+contents = token_file.read()
+
+client.run(contents)
