@@ -10,8 +10,8 @@ today = date.today()
 logging.basicConfig(level=logging.INFO)
 
 client = discord.Client()
-allUSStatesArray = ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY']
-
+allUSStatesSpelledOutArray = ["Alaska", "Alabama", "Arkansas", "American Samoa", "Arizona", "California", "Colorado", "Connecticut", "District of Columbia", "Delaware", "Florida", "Georgia", "Guam", "Hawaii", "Iowa", "Idaho", "Illinois", "Indiana", "Kansas", "Kentucky", "Louisiana", "Massachusetts", "Maryland", "Maine", "Michigan", "Minnesota", "Missouri", " ", "Mississippi", "Montana", "North Carolina", "North Dakota", "Nebraska", "New Hampshire", "New Jersey", "New Mexico", "Nevada", "New York", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Virginia", "Virgin Islands", "Vermont", "Washington", "Wisconsin", "West Virginia", "Wyoming"]
+allUSStatesArray = ['AK', 'AL', 'AR', 'AS', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'GU', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO','MP', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY']
 
 @client.event
 async def on_ready():
@@ -53,13 +53,22 @@ async def on_message(message):
        response = requests.request("GET", url, headers=headers, data=payload)
 
        print(response.text.encode('utf8'))
+       foundState = False
 
        to_python_JSONFILE = json.loads(response.text.encode('utf8'))
        indexOfState = -1
        for x in range(0, len(allUSStatesArray)):
            if stateDescribed == allUSStatesArray[x]:
+               foundState = True
                indexOfState = x
                print("Index found: " + str(indexOfState))
+
+       if not foundState:
+           for x in range(0, len(allUSStatesSpelledOutArray)):
+               if stateDescribed == allUSStatesSpelledOutArray[x]:
+                   foundState = True
+                   indexOfState = x
+                   print("Index found: " + str(indexOfState))
 
        print(to_python_JSONFILE[indexOfState])
        allStateInfo = to_python_JSONFILE[indexOfState]
