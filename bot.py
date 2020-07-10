@@ -40,6 +40,12 @@ async def on_message(message):
 
    #actual below
    #covid: il
+   if "help" in message.content:
+       await message.channel.send("`COVID-19 BOT`")
+       await message.channel.send("-----------------------------------")
+       await message.channel.send("Syntax: covid [state abbreviation or name]")
+       await message.channel.send("Returned with information regarding the COVID-19 Situation in your state")
+
    if "covid" in message.content:
        print(message.content)
        stateDescribed = message.content[7:len(message.content)]
@@ -69,12 +75,15 @@ async def on_message(message):
                    foundState = True
                    indexOfState = x
                    print("Index found: " + str(indexOfState))
+       if not foundState:
+           await message.channel.send("Please re-type your command.")
+           await message.channel.send("Syntax: covid [state abbreviation or name]")
 
        print(to_python_JSONFILE[indexOfState])
        allStateInfo = to_python_JSONFILE[indexOfState]
        print(allStateInfo['positive'])
        dateFormated = today.strftime("%b-%d-%Y")#date format
-       await message.channel.send(str(stateDescribed + " ALL INFORMATION AS OF " + dateFormated))
+       await message.channel.send("`" + str(stateDescribed + " ALL INFORMATION AS OF " + dateFormated) + "`")
        await message.channel.send("-----------------------------------")
        await message.channel.send(str(stateDescribed) + " Total Positive Cases:  " + str(allStateInfo['positive']))
        await message.channel.send(str(stateDescribed) + " Total Negative Cases:  " + str(allStateInfo['negative']))
