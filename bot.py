@@ -40,11 +40,11 @@ async def on_message(message):
 
    #actual below
    #covid: il
-   if "help" in message.content:
+   if "!help" in message.content:
        await message.channel.send("`COVID-19 BOT`")
        await message.channel.send("-----------------------------------")
-       await message.channel.send("Syntax: covid [state abbreviation or name]")
-       await message.channel.send("Returned with information regarding the COVID-19 Situation in your state")
+       await message.channel.send("Please Follow the Syntax: covid [state abbreviation or name]")
+       await message.channel.send("Once you enter which state, you will be returned with information regarding the COVID-19 Situation in your state")
 
    if "covid" in message.content or "Covid" in message.content or "COVID" in message.content:
        print(message.content)
@@ -89,7 +89,7 @@ async def on_message(message):
            await message.channel.send(str(stateDescribed) + " Citizens Recovered Today:  " + str(allStateInfo['recovered']))
        else:
            await message.channel.send("Please re-type your command.")
-           await message.channel.send("Syntax: covid [state abbreviation or name]")
+           await message.channel.send("Plesae Follow the Syntax: Covid [state abbreviation or name]")
 token_file = open("token", "r")#Load in the token file
 contents = token_file.read()
 
