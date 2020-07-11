@@ -75,21 +75,21 @@ async def on_message(message):
                    foundState = True
                    indexOfState = x
                    print("Index found: " + str(indexOfState))
-       if not foundState:
+
+       if foundState:
+           print(to_python_JSONFILE[indexOfState])
+           allStateInfo = to_python_JSONFILE[indexOfState]
+           print(allStateInfo['positive'])
+           dateFormated = today.strftime("%b-%d-%Y")#date format
+           await message.channel.send("`" + str(stateDescribed + " ALL INFORMATION AS OF " + dateFormated) + "`")
+           await message.channel.send("-----------------------------------")
+           await message.channel.send(str(stateDescribed) + " Total Positive Cases:  " + str(allStateInfo['positive']))
+           await message.channel.send(str(stateDescribed) + " Total Negative Cases:  " + str(allStateInfo['negative']))
+           await message.channel.send(str(stateDescribed) + " Citizens Hospitalized Currently:  " + str(allStateInfo['hospitalizedCurrently']))
+           await message.channel.send(str(stateDescribed) + " Citizens Recovered Today:  " + str(allStateInfo['recovered']))
+       else:
            await message.channel.send("Please re-type your command.")
            await message.channel.send("Syntax: covid [state abbreviation or name]")
-
-       print(to_python_JSONFILE[indexOfState])
-       allStateInfo = to_python_JSONFILE[indexOfState]
-       print(allStateInfo['positive'])
-       dateFormated = today.strftime("%b-%d-%Y")#date format
-       await message.channel.send("`" + str(stateDescribed + " ALL INFORMATION AS OF " + dateFormated) + "`")
-       await message.channel.send("-----------------------------------")
-       await message.channel.send(str(stateDescribed) + " Total Positive Cases:  " + str(allStateInfo['positive']))
-       await message.channel.send(str(stateDescribed) + " Total Negative Cases:  " + str(allStateInfo['negative']))
-       await message.channel.send(str(stateDescribed) + " Citizens Hospitalized Currently:  " + str(allStateInfo['hospitalizedCurrently']))
-       await message.channel.send(str(stateDescribed) + " Citizens Recovered Today:  " + str(allStateInfo['recovered']))
-
 token_file = open("token", "r")#Load in the token file
 contents = token_file.read()
 
