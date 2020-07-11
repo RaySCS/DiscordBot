@@ -40,7 +40,7 @@ async def on_message(message):
 
    #actual below
    #covid: il
-   if "!help" in message.content:
+   if "!hero" in message.content:
        await message.channel.send("`COVID-19 BOT`")
        await message.channel.send("-----------------------------------")
        await message.channel.send("Please Follow the Syntax: covid [state abbreviation or name]")
