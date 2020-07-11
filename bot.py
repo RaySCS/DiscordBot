@@ -46,7 +46,7 @@ async def on_message(message):
        await message.channel.send("Syntax: covid [state abbreviation or name]")
        await message.channel.send("Returned with information regarding the COVID-19 Situation in your state")
 
-   if "covid" in message.content or "Covid" in message.content:
+   if "covid" in message.content or "Covid" in message.content or "COVID" in message.content:
        print(message.content)
        stateDescribed = message.content[7:len(message.content)]
        # await message.channel.send("you described " + stateDescribed)
