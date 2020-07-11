@@ -86,9 +86,9 @@ async def on_message(message):
            await message.channel.send(str(stateDescribed) + " Total Positive Cases:  " + str(allStateInfo['positive']))
            await message.channel.send(str(stateDescribed) + " Total Negative Cases:  " + str(allStateInfo['negative']))
            await message.channel.send(str(stateDescribed) + " Citizens Hospitalized Currently:  " + str(allStateInfo['hospitalizedCurrently']))
-           await message.channel.send(str(stateDescribed) + " Citizens Recovered Today:  " + str(allStateInfo['recovered']))
        else:
            await message.channel.send("Please re-type your command.")
+           await message.channel.send("Plesae Follow the Syntax: Covid [state abbreviation or name] in order to get the information regarding the COVID-19 Situation in your state")
 
    if "hero" in message.content or "Hero" in message.content or "HERO" in message.content:
        print(message.content)
@@ -129,14 +129,10 @@ async def on_message(message):
            await message.channel.send("-----------------------------------")
            await message.channel.send(str(stateDescribed) + " Total Positive Cases:  " + str(allStateInfo['positive']))
            await message.channel.send(str(stateDescribed) + " Total Negative Cases:  " + str(allStateInfo['negative']))
-           await message.channel.send(
-               str(stateDescribed) + " Citizens Hospitalized Currently:  " + str(allStateInfo['hospitalizedCurrently']))
-           await message.channel.send(
-               str(stateDescribed) + " Citizens Recovered Today:  " + str(allStateInfo['recovered']))
+           await message.channel.send(str(stateDescribed) + " Citizens Hospitalized Currently:  " + str(allStateInfo['hospitalizedCurrently']))
        else:
            await message.channel.send("Please re-type your command.")
-           await message.channel.send(
-               "Plesae Follow the Syntax: Covid [state abbreviation or name] in order to get the information regarding the COVID-19 Situation in your state")
+           await message.channel.send("Plesae Follow the Syntax: Covid [state abbreviation or name] in order to get the information regarding the COVID-19 Situation in your state")
 token_file = open("token", "r")#Load in the token file
 contents = token_file.read()
 
